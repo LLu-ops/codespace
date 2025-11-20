@@ -12,7 +12,7 @@ FILE_PATH = './cleaned/binance_BTC_USDT_2020_2024.csv'
 LOOK_BACK = 60
 TRAIN_WINDOW = 1000
 INITIAL_TRAIN_RATIO = 0.6
-RETRAIN_FREQUENCY = 100
+RETRAIN_FREQUENCY = 1000
 NUM_EPOCHS = 100
 LR = 0.001
 HIDDEN_DIM = 16
@@ -37,17 +37,21 @@ def run_test():
     print(f"=== Processing {os.path.basename(FILE_PATH)} ===")
     
     df = pd.read_csv(FILE_PATH, index_col=0, parse_dates=True)
-    if 'returns' not in df.columns: df['returns'] = df['close'].pct_change().fillna(0)
+    
     
     n = len(df)
     split_idx = int(n * INITIAL_TRAIN_RATIO)
     
-    
+    df.replace([np.inf, -np.inf], np.nan, inplace=True)
+
+
+    df.ffill(inplace=True)
+    df.bfill(inplace=True)
     
     
 
-    X_df = df.drop(columns=['open', 'high', 'low', 'close', 'volume', 'returns']) 
-    Y_df = df['returns'].copy()
+    X_df = df.drop(columns=['open', 'high', 'low', 'close', 'volume', 'returns','log_return']) 
+    Y_df = df['log_return'].copy()
 
 
     
@@ -55,7 +59,7 @@ def run_test():
     
     pred_returns, base_prices, actual_prices, timestamps = [], [], [], []
 
-    # --- Walk-forward on first 0.6 ---
+    
     for t_start in range(LOOK_BACK, split_idx - LOOK_BACK, RETRAIN_FREQUENCY):
         start_win = max(0, t_start - TRAIN_WINDOW)
         X_train_raw = X_df.iloc[start_win:t_start].values
@@ -126,7 +130,8 @@ def run_test():
     pred_rets_real = Y_scaler.inverse_transform(pred_returns_np).flatten()
 
     # Calculate actual returns using prices (as before, since Y_scaler can only inverse one column)
-    actual_rets_real = (np.array(actual_prices) - np.array(base_prices)) / np.array(base_prices)
+    actual_rets_real = np.log(np.array(actual_prices) / np.array(base_prices))
+
     mse = mean_squared_error(actual_rets_real, pred_rets_real)
     print(f"Final MSE (Returns): {mse:.8f}")
 
@@ -147,7 +152,7 @@ def run_test():
              alpha=0.8)
              
     plt.title(f"Predicted vs. Actual Returns (MSE: {mse:.8f})")
-    plt.ylabel("Daily Return (Ratio)")
+    plt.ylabel("Log Return")
     plt.xlabel("Date")
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.5)
@@ -173,8 +178,8 @@ def run_test():
              linestyle='--', 
              alpha=0.8)
              
-    plt.title("Zoomed View: Last 100 Days (Directional Comparison)")
-    plt.ylabel("Daily Return (Ratio)")
+    plt.title("Zoomed View: Last 100 (Directional Comparison)")
+    plt.ylabel("log Return (Ratio)")
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.axhline(0, color='gray', linestyle='-')

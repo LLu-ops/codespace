@@ -21,9 +21,8 @@ for fp in sorted(glob.glob("./binance_*.csv")):
     if df.index.duplicated().any():
         df = df[~df.index.duplicated(keep='first')]
 
-    # compute log returns
-    if 'Close' in df.columns:
-        df['log_returns'] = np.log(df['Close'] / df['Close'].shift(1))
+    
+    
 
     # fill missing values
     df = df.asfreq(FREQ).fillna(method='ffill').fillna(method='bfill')
