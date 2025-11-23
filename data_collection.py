@@ -98,16 +98,16 @@ for symbol in symbols:
     
     # 1. PRICE-BASED FEATURES (Normalized)
     df['price_change'] = df['close'].pct_change()
-    df['log_return'] = np.log(df['close'] / df['close'].shift(1))
+    df['log_ret'] = np.log(df['close'] / df['close'].shift(1))
     df['norm_close'] = (df['close'] - df['close'].rolling(50).mean()) / df['close'].rolling(50).std()
     
     # 2. VOLATILITY FEATURES (Stationary)
-    df['volatility_30'] = df['log_return'].rolling(30).std()
-    df['volatility_7'] = df['log_return'].rolling(7).std()
+    df['volatility_30'] = df['log_ret'].rolling(30).std()
+    df['volatility_7'] = df['log_ret'].rolling(7).std()
     df['volatility_ratio'] = df['volatility_7'] / df['volatility_30']
     
     # Realized volatility (more predictive)
-    df['realized_vol'] = df['log_return'].rolling(24).std() * np.sqrt(365)  # Daily annualized
+    df['realized_vol'] = df['log_ret'].rolling(24).std() * np.sqrt(365)  # Daily annualized
     
     # 3. MOMENTUM OSCILLATORS (Normalized)
     # RSI with multiple timeframes
