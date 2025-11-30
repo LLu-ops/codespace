@@ -1,0 +1,16 @@
+{
+  "model": "lstm",
+  "trial": 20,
+  "mse": 2.7253035299138292e-05,
+  "params": {
+    "LOOK_BACK": 30,
+    "TRAIN_WINDOW": 2000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 64,
+    "epochs": 50,
+    "lr": 0.00013837299739553308,
+    "wd": 1.1213410192606483e-06,
+    "num_layers": 2,
+    "dropout": 0.24020689228870434
+  }
+}
