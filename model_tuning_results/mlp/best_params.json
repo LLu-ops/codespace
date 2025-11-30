@@ -1,0 +1,13 @@
+{
+  "value": 2.6451139498461456e-05,
+  "params": {
+    "LOOK_BACK": 30,
+    "TRAIN_WINDOW": 1000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 128,
+    "epochs": 100,
+    "lr": 0.0002462499452476398,
+    "wd": 7.037212319547899e-05,
+    "depth": 3
+  }
+}

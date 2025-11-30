@@ -1,0 +1,16 @@
+{
+  "model": "stacked_lstm",
+  "trial": 3,
+  "mse": 0.0010735920996258908,
+  "params": {
+    "LOOK_BACK": 60,
+    "TRAIN_WINDOW": 2000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 32,
+    "epochs": 50,
+    "lr": 2.0070318271819198e-05,
+    "wd": 5.16514628434755e-07,
+    "num_layers": 1,
+    "dropout": 0.2021725718543157
+  }
+}

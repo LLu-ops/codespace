@@ -1,0 +1,15 @@
+{
+  "model": "mlp",
+  "trial": 12,
+  "mse": 2.6557486660474154e-05,
+  "params": {
+    "LOOK_BACK": 30,
+    "TRAIN_WINDOW": 1000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 128,
+    "epochs": 100,
+    "lr": 0.000201067246509931,
+    "wd": 1.445948985901787e-05,
+    "depth": 3
+  }
+}

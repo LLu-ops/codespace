@@ -1,0 +1,12 @@
+{
+  "params": {
+    "LOOK_BACK": 60,
+    "TRAIN_WINDOW": 1000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 128,
+    "epochs": 50,
+    "lr": 0.0004955348621172121,
+    "wd": 9.627569457246096e-05,
+    "conv_ch": 16
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": "bilstm",
+  "trial": 1,
+  "mse": 3.3371055019623314e-05,
+  "params": {
+    "LOOK_BACK": 30,
+    "TRAIN_WINDOW": 2000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 32,
+    "epochs": 100,
+    "lr": 1.0225030293601196e-05,
+    "wd": 5.718459640820346e-07,
+    "num_layers": 3,
+    "dropout": 0.006101988498535604
+  }
+}

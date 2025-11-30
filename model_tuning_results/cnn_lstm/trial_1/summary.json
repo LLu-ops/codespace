@@ -1,0 +1,15 @@
+{
+  "model": "cnn_lstm",
+  "trial": 1,
+  "mse": 2.637568608712466e-05,
+  "params": {
+    "LOOK_BACK": 30,
+    "TRAIN_WINDOW": 1000,
+    "RETRAIN_FREQUENCY": 100,
+    "hidden": 32,
+    "epochs": 50,
+    "lr": 2.6845086198683477e-05,
+    "wd": 2.4377407962272566e-05,
+    "conv_ch": 64
+  }
+}
